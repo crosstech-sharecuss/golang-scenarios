@@ -1,2 +1,3 @@
-# golang-scenarios
-Golang Scenarios
+# Golang Scenarios
+
+This repository contains scenario based golang projects.
