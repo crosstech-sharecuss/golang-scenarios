@@ -1,11 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
-
-	"gopkg.in/yaml.v2"
 )
 
 func main() {
@@ -15,14 +14,14 @@ func main() {
 }
 
 func ReadAppConfigFile() *AppConfig {
-	yamlFile, err := ioutil.ReadFile("config.yaml")
+	jsonFile, err := ioutil.ReadFile("config.json")
 	if err != nil {
-		log.Printf("yamlFile.Get err   #%v ", err)
+		log.Printf("jsonFile.Get err   #%v ", err)
 	}
 
 	var config AppConfig
 
-	err = yaml.Unmarshal(yamlFile, &config)
+	err = json.Unmarshal(jsonFile, &config)
 	if err != nil {
 		log.Fatalf("Unmarshal: %v", err)
 	}
@@ -33,12 +32,12 @@ func ReadAppConfigFile() *AppConfig {
 // Structs that represent config file structure
 
 type AppConfig struct {
-	Database DatabaseConfig `yaml:"database"`
+	Database DatabaseConfig `json:"database"`
 }
 
 type DatabaseConfig struct {
-	Ip       string `yaml:"ip"`
-	Username string `yaml:"username"`
-	Password string `yaml:"password"`
-	Database string `yaml:"database"`
+	Ip       string `json:"ip"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Database string `json:"database"`
 }
